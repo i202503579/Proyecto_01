@@ -1,11 +1,11 @@
-import React, { useState } from "react"; 
-import { Link } from "react-router-dom";
-import "./contacto.css";
+import React, { useState } from "react";
+import "../contacto/contacto.css";
 
-export default function Contacto() {
+export default function Registro() {
   const [formData, setFormData] = useState({
+    nombre: "",
     email: "",
-    mensaje: ""
+    password: ""
   });
 
   const handleChange = (e) => {
@@ -19,7 +19,7 @@ export default function Contacto() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/api/consulta", {
+      const response = await fetch("http://localhost:4000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -37,26 +37,33 @@ export default function Contacto() {
       alert(data.message);
 
       setFormData({
+        nombre: "",
         email: "",
-        mensaje: ""
+        password: ""
       });
 
     } catch (error) {
       console.error(error);
-      alert("Error al enviar la consulta");
+      alert("Error al registrar usuario");
     }
   };
 
   return (
     <div className="contacto-container">
-      <h2 className="contacto-titulo">Contáctanos</h2>
-      <p className="contacto-subtitulo">
-        Solo usuarios registrados pueden enviar consultas.
-      </p>
+      <h2 className="contacto-titulo">Registro</h2>
 
       <form className="contacto-form" onSubmit={handleSubmit}>
 
-        <label>Email registrado</label>
+        <label>Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          value={formData.nombre}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Email</label>
         <input
           type="email"
           name="email"
@@ -65,16 +72,19 @@ export default function Contacto() {
           required
         />
 
-        <label>Mensaje</label>
-        <textarea
-          name="mensaje"
-          rows="4"
-          value={formData.mensaje}
+        <label>Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
           onChange={handleChange}
           required
-        ></textarea>
+        />
 
-        <button type="submit" className="contacto-btn">Enviar</button>
+        <button type="submit" className="contacto-btn">
+          Registrarse
+        </button>
+
       </form>
     </div>
   );

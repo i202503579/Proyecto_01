@@ -20,6 +20,7 @@ export default function Footer() {
             <li><Link to="/" className="hover:text-white">Menú</Link></li>
             <li><Link to="/nosotros" className="hover:text-white">Nosotros</Link></li>
             <li><Link to="/contacto" className="hover:text-white">Contacto</Link></li>
+            <li><Link to="/Registro" className="hover:text-white">Registrarme</Link></li>
           </ul>
         </div>
 
